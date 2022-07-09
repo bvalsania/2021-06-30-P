@@ -64,7 +64,7 @@ public class Genes {
 
 	@Override
 	public String toString() {
-		return this.geneId;
+		return this.geneId+"\n";
 	}
 
 

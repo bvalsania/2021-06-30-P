@@ -1,8 +1,11 @@
 package it.polito.tdp.genes;
 
 import java.net.URL;
+import java.util.List;
 import java.util.ResourceBundle;
 
+import it.polito.tdp.genes.model.Connessa;
+import it.polito.tdp.genes.model.Coppia;
 import it.polito.tdp.genes.model.Model;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
@@ -27,7 +30,7 @@ public class FXMLController {
     private Button btnRicerca;
 
     @FXML
-    private ComboBox<?> boxLocalizzazione;
+    private ComboBox<String> boxLocalizzazione;
 
     @FXML
     private TextArea txtResult;
@@ -40,6 +43,31 @@ public class FXMLController {
     @FXML
     void doStatistiche(ActionEvent event) {
 
+   
+    	txtResult.clear();
+    	String l = this.boxLocalizzazione.getValue();
+    	
+    	List<Connessa> lista = this.model.getStatistica(l);
+    	
+    	txtResult.appendText("Statistica:\n"+lista);
+    	
+    	
+    	
+    	/*txtResult.clear();
+    	String li = this.boxLocalizzazione.getValue();
+    	List<String> adiacenza = this.model.getAdaicenza(li);
+    	
+    	
+    	
+    		for(Coppia d:  model.getArchi()) {
+    			if(d.getL1().equals(li)) {
+    				Coppia coppia = new Coppia(li, adiacenza.toString(), d.getPeso());
+    				txtResult.appendText(coppia.getL2()+"      "+ coppia.getPeso());
+    				
+    			}
+    		}
+    	
+    	*/
     }
 
     @FXML
@@ -52,6 +80,43 @@ public class FXMLController {
     }
 
 	public void setModel(Model model) {
+	
 		this.model = model;
+		
+		String m = this.model.creaGrafo();
+		txtResult.appendText(m);
+		
+		
+		this.boxLocalizzazione.getItems().clear();
+		this.boxLocalizzazione.getItems().addAll(this.model.getvertici());
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		/*	
+		
+		boxLocalizzazione.getItems().clear();
+		boxLocalizzazione.getItems().addAll(this.model.getLocalization());
+		
+		model.creaGrafo();
+		txtResult.clear();
+		txtResult.appendText("Grafo Creato!! \n");
+		txtResult.appendText("#VERTICI: "+ this.model.nVertici() + "\n");
+    	txtResult.appendText("#ARCHI: " +this.model.nArchi()+"\n");
+*/
 	}
+	
 }
